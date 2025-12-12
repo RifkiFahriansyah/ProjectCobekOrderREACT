@@ -1,0 +1,189 @@
+/* ====================================
+   DETAIL PAGE STYLES
+   - Modern mobile-first design
+   - Maroon & orange-red theme
+   - Clean minimalistic layout
+==================================== */
+
+/* Main wrapper */
+.detail-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  background: #f8f9fb;
+  overscroll-behavior: contain;
+}
+
+.detail-wrapper::-webkit-scrollbar {
+  display: none;                /* Hide scrollbar */
+}
+
+.detail-wrapper {
+  scrollbar-width: none;        /* Hide scrollbar (Firefox) */
+  -ms-overflow-style: none;     /* Hide scrollbar (IE/Edge) */
+}
+
+/* ====================================
+   1. TOP HEADER IMAGE SECTION
+==================================== */
+.detail-hero-image {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 0 0 32px 32px;
+  margin-bottom: -20px;
+}
+
+.detail-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Circular Back Button */
+.detail-back-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s;
+  z-index: 10;
+  color: #1a1a1a;
+}
+
+.detail-back-btn:hover {
+  background: white;
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.detail-back-btn:active {
+  transform: scale(0.95);
+}
+
+/* ====================================
+   2. WHITE ROUNDED DETAIL CARD
+==================================== */
+.detail-info-card {
+  background: white;
+  border-radius: 35px 35px 40px 40px;
+  padding: 28px 24px 40px 24px;
+  margin: 0 0 20px 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 5;
+  min-height: calc(100vh - 300px - 180px);
+}
+
+.detail-menu-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.detail-menu-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #8B2635;
+  margin-bottom: 16px;
+}
+
+.detail-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin-bottom: 16px;
+}
+
+.detail-menu-description {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0;
+  padding-bottom: 24px;
+}
+
+/* ====================================
+   4. BOTTOM FLOATING ORDER AREA
+==================================== */
+.detail-bottom-float-container {
+  background: white;
+  padding: 18px 20px 18px 20px;
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.12);
+  border-radius: 24px;
+}
+
+/* Add Order Button */
+.detail-add-order-btn {
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #ff6b35 0%, #ff5520 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.35);
+  transition: all 0.3s;
+}
+
+.detail-add-order-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 107, 53, 0.45);
+}
+
+.detail-add-order-btn:active {
+  transform: translateY(0);
+}
+
+.detail-order-price {
+  background: rgba(255, 255, 255, 0.25);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* ====================================
+   RESPONSIVE ADJUSTMENTS
+==================================== */
+@media (max-width: 380px) {
+  .detail-hero-image {
+    height: 250px;
+  }
+
+  .detail-menu-name {
+    font-size: 22px;
+  }
+
+  .detail-menu-price {
+    font-size: 18px;
+  }
+
+  .detail-add-order-btn {
+    font-size: 15px;
+    padding: 14px 20px;
+  }
+}
+
+/* ====================================
+   SMOOTH SCROLLING
+==================================== */
+/* Removed - integrated into .detail-wrapper above */

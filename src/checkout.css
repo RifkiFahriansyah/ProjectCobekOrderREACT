@@ -1,0 +1,536 @@
+/* ====================================
+   CHECKOUT PAGE STYLES
+   - Modern mobile-first design
+   - Maroon & orange-red theme
+   - Clean minimalistic layout
+==================================== */
+
+/* ====================================
+   1. TOP HEADER BAR
+==================================== */
+.checkout-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  z-index: 20;
+}
+
+.checkout-back-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #1a1a1a;
+}
+
+.checkout-back-btn:hover {
+  background: #e5e7eb;
+  transform: scale(1.05);
+}
+
+.checkout-back-btn:active {
+  transform: scale(0.95);
+}
+
+.checkout-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+/* ====================================
+   2. SCROLLABLE CONTENT AREA
+==================================== */
+.checkout-content {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  background: #f8f9fb;
+  padding: 16px;
+  overscroll-behavior: contain;
+}
+
+.checkout-content::-webkit-scrollbar {
+  display: none;                /* Hide scrollbar */
+}
+
+.checkout-content {
+  scrollbar-width: none;        /* Hide scrollbar (Firefox) */
+  -ms-overflow-style: none;     /* Hide scrollbar (IE/Edge) */
+}
+
+/* Empty State */
+.checkout-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.checkout-empty-state svg {
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.checkout-empty-state p {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* ====================================
+   3. ORDER ITEM CARDS
+==================================== */
+.checkout-items-container {
+  margin-bottom: 16px;
+}
+
+.checkout-item-card {
+  background: white;
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  gap: 14px;
+  transition: transform 0.2s;
+}
+
+.checkout-item-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.checkout-item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-item-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.checkout-item-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #8B2635;
+  margin: 0 0 12px 0;
+}
+
+/* Item Actions Row */
+.checkout-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.checkout-qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f3f4f6;
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+
+.checkout-qty-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: #8B2635;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.checkout-qty-btn:hover {
+  background: #6d1e2a;
+  transform: scale(1.05);
+}
+
+.checkout-qty-btn:active {
+  transform: scale(0.95);
+}
+
+.checkout-qty-number {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a1a;
+  min-width: 28px;
+  text-align: center;
+}
+
+.checkout-delete-btn {
+  padding: 6px 16px;
+  background: transparent;
+  border: 1.5px solid #ff6b35;
+  border-radius: 16px;
+  color: #ff6b35;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.checkout-delete-btn:hover {
+  background: #ff6b35;
+  color: white;
+  transform: scale(1.02);
+}
+
+.checkout-delete-btn:active {
+  transform: scale(0.98);
+}
+
+/* ====================================
+   4. SUMMARY CARD (Subtotal + Tax + Total)
+==================================== */
+.checkout-summary-card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 16px;
+}
+
+.checkout-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.checkout-summary-row:last-child {
+  margin-bottom: 0;
+}
+
+.checkout-summary-label {
+  font-size: 15px;
+  color: #6b7280;
+}
+
+.checkout-summary-value {
+  font-size: 15px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.checkout-summary-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 12px 0 16px 0;
+}
+
+.checkout-summary-total {
+  margin-top: 4px;
+}
+
+.checkout-summary-label-bold {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.checkout-summary-value-bold {
+  font-size: 17px;
+  font-weight: 700;
+  color: #8B2635;
+}
+
+/* ====================================
+   5. BOTTOM PAYMENT BAR (STICKY)
+==================================== */
+.checkout-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 14px 16px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  z-index: 20;
+  border-radius: 20px 20px 0 0;
+}
+
+.checkout-bottom-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.checkout-bottom-label {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1;
+}
+
+.checkout-bottom-total {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.checkout-payment-btn {
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #ff6b35 0%, #ff5520 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.35);
+  transition: all 0.3s;
+}
+
+.checkout-payment-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 107, 53, 0.45);
+}
+
+.checkout-payment-btn:active {
+  transform: translateY(0);
+}
+
+/* ====================================
+   RESPONSIVE ADJUSTMENTS
+==================================== */
+@media (max-width: 380px) {
+  .checkout-item-image {
+    width: 70px;
+    height: 70px;
+  }
+
+  .checkout-item-name {
+    font-size: 15px;
+  }
+
+  .checkout-payment-btn {
+    font-size: 14px;
+    padding: 12px 20px;
+  }
+
+  .checkout-bottom-total {
+    font-size: 16px;
+  }
+}
+
+/* ====================================
+   CONFIRMATION MODAL
+==================================== */
+
+/* Modal Overlay - Blurred Background */
+.checkout-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 100;
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* Modal Box - Centered Container */
+.checkout-modal-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 110;
+  width: 90%;
+  max-width: 340px;
+  animation: modalSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Modal Content */
+.checkout-modal-content {
+  background: white;
+  border-radius: 24px;
+  padding: 28px 24px 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal Title */
+.checkout-modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 12px 0;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Modal Text */
+.checkout-modal-text {
+  font-size: 15px;
+  font-weight: 400;
+  color: #4a5568;
+  line-height: 1.6;
+  margin: 0 0 24px 0;
+  text-align: center;
+}
+
+.checkout-modal-text strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+/* Modal Buttons Container */
+.checkout-modal-buttons {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+}
+
+/* Base Button Style */
+.checkout-modal-btn {
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+/* Cancel Button */
+.checkout-modal-btn-cancel {
+  background: white;
+  color: #8B2635;
+  border: 2px solid #8B2635;
+  order: 2;
+}
+
+.checkout-modal-btn-cancel:hover {
+  background: #fef2f2;
+  transform: translateY(-1px);
+}
+
+.checkout-modal-btn-cancel:active {
+  transform: translateY(0);
+}
+
+/* Confirm/Remove Button */
+.checkout-modal-btn-confirm {
+  background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  order: 1;
+}
+
+.checkout-modal-btn-confirm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
+}
+
+.checkout-modal-btn-confirm:active {
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Responsive Modal Adjustments */
+@media (max-width: 380px) {
+  .checkout-modal-content {
+    padding: 24px 20px 20px;
+  }
+
+  .checkout-modal-title {
+    font-size: 20px;
+  }
+
+  .checkout-modal-text {
+    font-size: 14px;
+  }
+
+  .checkout-modal-btn {
+    font-size: 15px;
+    padding: 13px 20px;
+  }
+}
+
+@media (min-width: 480px) {
+  .checkout-modal-buttons {
+    flex-direction: row;
+  }
+
+  .checkout-modal-btn-cancel {
+    order: 1;
+  }
+
+  .checkout-modal-btn-confirm {
+    order: 2;
+  }
+}

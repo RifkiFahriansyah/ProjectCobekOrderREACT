@@ -1,0 +1,313 @@
+/* ==========================
+   RESPONSIVE MOBILE FRAMEWORK
+   Desktop: Phone frame view
+   Mobile: Full-screen responsive
+========================== */
+
+/* Global box-sizing and overflow prevention */
+* {
+  box-sizing: border-box;
+}
+
+/* ==========================
+   APP VIEWPORT (Universal Container)
+========================== */
+.app-viewport {
+  width: 100%;
+  height: 100vh;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* ==========================
+   PHONE WRAPPER (Responsive Container)
+========================== */
+/* MOBILE: Full-screen, no frame */
+@media (max-width: 768px) {
+  .phone-wrapper {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    overflow: hidden;
+    background: #fff;
+    /* Safe area support for notches/punch-holes */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .phone {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    overflow: hidden;
+  }
+}
+
+/* DESKTOP: Phone frame view */
+@media (min-width: 769px) {
+  .phone-wrapper {
+    width: 430px;
+    height: 749px;
+    margin: auto;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .phone {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    overflow: hidden;
+    transform-origin: top center;
+    transform: scale(var(--scale, 1));
+  }
+}
+
+/* ==========================
+   HEADER & FOOTER (Responsive)
+========================== */
+.phone-header {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: clamp(50px, 8vh, 56px);
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(12px, 3vw, 16px);
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 20;
+}
+
+.phone-footer {
+  position: absolute;
+  inset: auto 0 0 0;
+  min-height: clamp(56px, 9vh, 64px);
+  background: #fff;
+  border-top: 1px solid #eee;
+  padding: clamp(6px, 1.5vh, 8px) clamp(10px, 2.5vw, 12px);
+  z-index: 20;
+}
+
+/* ==========================
+   MAIN CONTENT (Responsive Scroll)
+========================== */
+.phone-content {
+  position: absolute;
+  top: clamp(50px, 8vh, 56px);
+  bottom: clamp(56px, 9vh, 64px);
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: clamp(10px, 2.5vw, 12px);
+  background: #f8f9fb;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.phone-content::-webkit-scrollbar {
+  display: none;
+}
+
+.phone-content {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.phone-content.no-footer {
+  bottom: 0;
+}
+
+.phone-content.no-header {
+  top: 0;
+}
+
+.phone-content.with-bottom-nav {
+  top: 0;
+  bottom: clamp(56px, 9vh, 60px);
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .phone-content {
+    /* Adjust for safe areas on mobile */
+    padding-bottom: calc(clamp(10px, 2.5vw, 12px) + env(safe-area-inset-bottom));
+  }
+}
+
+/* Tombol kecil */
+.btn-square-sm {
+  width: clamp(36px, 8vw, 40px);
+  height: clamp(36px, 8vw, 40px);
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+/* ==========================
+   FLOATING CTA (Responsive)
+========================== */
+/* Desktop */
+@media (min-width: 769px) {
+  .floating-cta {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 70px;
+    z-index: 50;
+    width: calc(100% - 48px);
+    max-width: 390px;
+    pointer-events: none;
+  }
+
+  .floating-cta.docked {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 70px;
+    width: calc(100% - 48px);
+    max-width: 390px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .floating-cta {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: clamp(60px, 10vh, 80px);
+    z-index: 50;
+    padding: 0 clamp(12px, 3vw, 16px);
+    pointer-events: none;
+  }
+
+  .floating-cta.docked {
+    position: absolute;
+    bottom: clamp(60px, 10vh, 80px);
+  }
+}
+
+.floating-cta > * {
+  pointer-events: auto;
+}
+
+/* Anchor tanda bawah */
+.dock-anchor {
+  width: 1px;
+  height: clamp(8px, 2vh, 12px);
+  margin-top: clamp(8px, 2vh, 12px);
+}
+
+/* ==========================
+   BOTTOM NAVBAR (Responsive)
+========================== */
+.bottom-navbar {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: clamp(56px, 9vh, 60px);
+  background: #8B2635;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: clamp(6px, 1.5vh, 8px) clamp(12px, 3vw, 16px);
+  z-index: 30;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile: Add safe area padding */
+@media (max-width: 768px) {
+  .bottom-navbar {
+    padding-bottom: calc(clamp(6px, 1.5vh, 8px) + env(safe-area-inset-bottom));
+  }
+}
+
+.bottom-nav-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  padding: clamp(6px, 1.5vw, 8px) clamp(12px, 3vw, 16px);
+  border-radius: clamp(10px, 2.5vw, 12px);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-nav-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.bottom-nav-btn.active {
+  color: white;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.bottom-nav-btn svg {
+  width: clamp(20px, 5vw, 24px);
+  height: clamp(20px, 5vw, 24px);
+}
+
+/* ==========================
+   PREVENT HORIZONTAL OVERFLOW
+========================== */
+body {
+  overflow-x: hidden !important;
+}
+
+.phone-screen {
+  overflow-x: hidden;
+}
+
+/* ==========================
+   TOUCH OPTIMIZATIONS
+========================== */
+@media (max-width: 768px) {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    touch-action: manipulation;
+  }
+
+  /* Improve touch targets on mobile */
+  button, a, input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
