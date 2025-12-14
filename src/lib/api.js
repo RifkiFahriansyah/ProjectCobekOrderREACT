@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8000/api";
+export const API_BASE = import.meta.env.VITE_API_BASE || "https://tesdeploycobek.vercel.app/api/api";
 export const api = axios.create({ baseURL: API_BASE, timeout: 20000 });
 
 export const fetchMenus = () => api.get("/menus");

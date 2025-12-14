@@ -21,10 +21,10 @@ export default function BottomNavbar() {
   const tableNumber = searchParams.get("table");
 
   return (
-    <div className="bottom-navbar">
+    <div className="absolute bottom-0 inset-x-0 h-14 bg-maroon flex items-center justify-around px-4 z-50">
       {/* History Icon - Left */}
       <button
-        className={`bottom-nav-btn ${isHistory ? "active" : ""}`}
+        className={`flex items-center justify-center w-10 h-10 rounded-xl transition-all ${isHistory ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white'}`}
         onClick={() => navigate(tableNumber ? `/history?table=${tableNumber}` : "/history")}
         aria-label="History"
       >
@@ -45,7 +45,7 @@ export default function BottomNavbar() {
 
       {/* Home Icon - Center */}
       <button
-        className={`bottom-nav-btn ${isHome ? "active" : ""}`}
+        className={`flex items-center justify-center w-10 h-10 rounded-xl transition-all ${isHome ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white'}`}
         onClick={() => navigate(tableNumber ? `/?table=${tableNumber}` : "/")}
         aria-label="Home"
       >
@@ -66,7 +66,7 @@ export default function BottomNavbar() {
 
       {/* Back Icon - Right (Navigate to Home) */}
       <button
-        className="bottom-nav-btn"
+        className="flex items-center justify-center w-10 h-10 rounded-xl text-white/70 hover:text-white transition-all"
         onClick={() => navigate(tableNumber ? `/?table=${tableNumber}` : "/")}
         aria-label="Back to Home"
       >

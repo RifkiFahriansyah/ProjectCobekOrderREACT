@@ -6,7 +6,6 @@ import { useCart } from "../state/CartContext";
 import PhoneShell from "../components/PhoneShell";
 import { addOrderHistory } from "../utils/history";
 import { getOrCreateCustomerSession } from "../utils/customerSession";
-import "../payment.css";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -95,48 +94,50 @@ export default function Payment({ tableNumber }) {
   return (
     <PhoneShell noHeader noFooter>
       {/* TOP HEADER AREA */}
-      <div className="payment-header">
+      <div className="absolute top-0 inset-x-0 h-14 bg-maroon flex items-center justify-between px-4 z-10">
         <button 
-          className="payment-back-btn" 
+          className="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" 
           onClick={() => nav(-1)}
           aria-label="Back"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="19" y1="12" x2="5" y2="12" />
             <polyline points="12 19 5 12 12 5" />
           </svg>
         </button>
-        <h5 className="payment-header-title">Pembayaran</h5>
-        <div style={{ width: '40px' }}></div>
+        <h5 className="text-lg font-bold text-white">Pembayaran</h5>
+        <div className="w-11"></div>
       </div>
 
       {/* SCROLLABLE CONTENT */}
-      <div className="payment-content">
+      <div className="pt-14 pb-24 h-full overflow-y-auto bg-gray-50">
         {/* ORDER TYPE BANNER */}
-        <div className="payment-order-type">
+        <div className="mx-4 mt-4 mb-3 bg-gradient-to-r from-maroon to-maroon-600 text-white text-sm font-semibold py-3 px-4 rounded-xl shadow-sm">
           Tipe Order : Makan Ditempat
         </div>
 
         {/* ERROR BANNER */}
         {"items" in errors && (
-          <div className="payment-alert-warning">
+          <div className="mx-4 mb-3 bg-yellow-50 border border-yellow-200 text-yellow-800 text-sm py-3 px-4 rounded-xl">
             Keranjang kosong. Tambahkan item terlebih dahulu.
           </div>
         )}
 
         {/* CUSTOMER INFORMATION FORM */}
-        <div className="payment-form-section">
-          <div className="payment-form-group">
-            <label className="payment-label">
-              Nama Lengkap <span className="payment-required">*</span>
+        <div className="mx-4 bg-white rounded-2xl p-5 shadow-sm mb-4">
+          <div className="mb-4">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Nama Lengkap <span className="text-red-500">*</span>
             </label>
-            <div className="payment-input-wrapper">
-              <svg className="payment-input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <div className="relative">
+              <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
               <input
-                className={`payment-input ${errors.name ? "payment-input-error" : ""}`}
+                className={`w-full pl-11 pr-4 py-3 border rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                  errors.name ? "border-red-300 focus:ring-red-200" : "border-gray-200 focus:ring-maroon/20"
+                }`}
                 placeholder="Masukkan nama lengkap"
                 value={form.name}
                 onChange={(e) => {
@@ -147,16 +148,18 @@ export default function Payment({ tableNumber }) {
             </div>
           </div>
 
-          <div className="payment-form-group">
-            <label className="payment-label">
-              Nomor Telepon <span className="payment-required">*</span>
+          <div className="mb-4">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Nomor Telepon <span className="text-red-500">*</span>
             </label>
-            <div className="payment-input-wrapper">
-              <svg className="payment-input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <div className="relative">
+              <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
               </svg>
               <input
-                className={`payment-input ${errors.phone ? "payment-input-error" : ""}`}
+                className={`w-full pl-11 pr-4 py-3 border rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                  errors.phone ? "border-red-300 focus:ring-red-200" : "border-gray-200 focus:ring-maroon/20"
+                }`}
                 placeholder="08xxxxxxxxxx"
                 value={form.phone}
                 inputMode="numeric"
@@ -166,17 +169,19 @@ export default function Payment({ tableNumber }) {
             </div>
           </div>
 
-          <div className="payment-form-group">
-            <label className="payment-label">
-              Email <span className="payment-required">*</span>
+          <div className="mb-4">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Email <span className="text-red-500">*</span>
             </label>
-            <div className="payment-input-wrapper">
-              <svg className="payment-input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <div className="relative">
+              <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                 <polyline points="22,6 12,13 2,6" />
               </svg>
               <input
-                className={`payment-input ${errors.email ? "payment-input-error" : ""}`}
+                className={`w-full pl-11 pr-4 py-3 border rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                  errors.email ? "border-red-300 focus:ring-red-200" : "border-gray-200 focus:ring-maroon/20"
+                }`}
                 placeholder="email@example.com"
                 type="email"
                 value={form.email}
@@ -188,28 +193,28 @@ export default function Payment({ tableNumber }) {
             </div>
           </div>
 
-          <div className="payment-form-group">
-            <label className="payment-label">
-              Nomor Meja <span className="payment-required">*</span>
+          <div className="mb-4">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Nomor Meja <span className="text-red-500">*</span>
             </label>
-            <div className="payment-input-wrapper">
-              <svg className="payment-input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <div className="relative">
+              <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                 <line x1="12" y1="8" x2="12" y2="16" />
                 <line x1="8" y1="12" x2="16" y2="12" />
               </svg>
               <input
-                className="payment-input payment-input-disabled"
+                className="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-500 cursor-not-allowed"
                 value={tableNumber}
                 disabled
               />
             </div>
           </div>
 
-          <div className="payment-form-group">
-            <label className="payment-label">Catatan (opsional)</label>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">Catatan (opsional)</label>
             <textarea
-              className="payment-textarea"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-maroon/20 transition-all resize-none"
               rows={3}
               placeholder="Contoh: sambal dipisah, tanpa es, dsb."
               value={form.note}
@@ -219,50 +224,54 @@ export default function Payment({ tableNumber }) {
         </div>
 
         {/* PAYMENT METHOD SECTION */}
-        <div className="payment-method-section">
-          <h6 className="payment-section-title">Metode Pembayaran</h6>
-          <div className="payment-method-button">
+        <div className="mx-4 bg-white rounded-2xl p-5 shadow-sm mb-4">
+          <h6 className="text-base font-bold text-gray-900 mb-3">Metode Pembayaran</h6>
+          <div className="bg-gradient-to-r from-maroon/5 to-maroon/10 border border-maroon/20 text-maroon font-semibold py-3 px-4 rounded-xl text-center">
             Pembayaran Online
           </div>
         </div>
 
-        <div className="payment-method-section">
-          <h6 className="payment-section-title">Pilih Pembayaran</h6>
-          <div className="payment-qris-card">
+        <div className="mx-4 bg-white rounded-2xl p-5 shadow-sm mb-4">
+          <h6 className="text-base font-bold text-gray-900 mb-3">Pilih Pembayaran</h6>
+          <div className="flex items-center gap-3 bg-white border-2 border-maroon rounded-xl py-3 px-4">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8B2635" strokeWidth="2">
               <rect x="3" y="3" width="7" height="7" />
               <rect x="14" y="3" width="7" height="7" />
               <rect x="14" y="14" width="7" height="7" />
               <rect x="3" y="14" width="7" height="7" />
             </svg>
-            <span className="payment-qris-text">QRIS</span>
+            <span className="text-base font-bold text-maroon">QRIS</span>
           </div>
         </div>
 
         {/* TOTAL PAYMENT SUMMARY */}
-        <div className="payment-summary-card">
-          <div className="payment-summary-label">Total Pembayaran</div>
-          <div className="payment-summary-total">Rp {total.toLocaleString()}</div>
-          <div className="payment-summary-breakdown">
-            <div className="payment-summary-row">
-              <span>Subtotal</span>
-              <span>Rp {subtotal.toLocaleString()}</span>
+        <div className="mx-4 bg-white rounded-2xl p-5 shadow-sm mb-4">
+          <div className="text-sm text-gray-500 mb-1">Total Pembayaran</div>
+          <div className="text-2xl font-bold text-maroon mb-4">Rp {total.toLocaleString()}</div>
+          <div className="pt-3 border-t border-gray-200 space-y-2">
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-600">Subtotal</span>
+              <span className="font-semibold text-gray-900">Rp {subtotal.toLocaleString()}</span>
             </div>
-            <div className="payment-summary-row">
-              <span>PPN 10%</span>
-              <span>Rp {ppn.toLocaleString()}</span>
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-600">PPN 10%</span>
+              <span className="font-semibold text-gray-900">Rp {ppn.toLocaleString()}</span>
             </div>
           </div>
         </div>
 
         {/* Bottom spacer */}
-        <div style={{ height: '100px' }}></div>
+        <div className="h-24"></div>
       </div>
 
       {/* PAY BUTTON (STICKY AT BOTTOM) */}
-      <div className="payment-bottom-bar">
+      <div className="absolute bottom-0 inset-x-0 bg-white border-t border-gray-200 px-4 py-4 z-20">
         <button
-          className={`payment-pay-btn ${validation.valid ? "payment-pay-btn-valid" : "payment-pay-btn-invalid"}`}
+          className={`w-full py-4 rounded-full font-bold text-white shadow-lg transition-all ${
+            validation.valid 
+              ? "bg-gradient-to-r from-orange to-orange-dark hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0" 
+              : "bg-gray-300 cursor-not-allowed"
+          }`}
           disabled={loading || !validation.valid}
           onClick={submit}
         >

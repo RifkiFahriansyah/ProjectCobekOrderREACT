@@ -1,4 +1,7 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
+
+/* eslint-disable react-refresh/only-export-components */
+
 const CartCtx = createContext(null);
 
 export function CartProvider({ children }) {
@@ -51,4 +54,7 @@ export function CartProvider({ children }) {
     </CartCtx.Provider>
   );
 }
-export const useCart = () => useContext(CartCtx);
+
+export function useCart() {
+  return useContext(CartCtx);
+}

@@ -40,8 +40,17 @@ export default function StickyDock({
   // Render tombol di root ".phone" agar absolute-nya mengacu ke frame HP
   if (!phoneEl) return null;
   return createPortal(
-    <div className={`floating-cta ${docked ? "docked" : ""}`}>
-      {children}
+    <div className={`
+      ${docked ? 'absolute' : 'fixed'}
+      left-1/2 -translate-x-1/2
+      bottom-[70px] z-50
+      w-[calc(100%-48px)] max-w-[390px]
+      pointer-events-none
+      transition-all duration-300
+    `}>
+      <div className="pointer-events-auto">
+        {children}
+      </div>
     </div>,
     phoneEl
   );

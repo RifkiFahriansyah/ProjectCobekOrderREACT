@@ -51,15 +51,23 @@ export default function PhoneShell({
   }, [isMobile]);
 
   return (
-    <div className="app-viewport">
-      <div className="phone-wrapper">
-        <div className="phone-screen">
-          <div className="phone">
-            {!noHeader && <div className="phone-header">{header}</div>}
-            <div className={`phone-content ${noFooter ? "no-footer" : ""} ${noHeader ? "no-header" : ""} ${showBottomNav ? "with-bottom-nav" : ""}`}>
+    <div className={`${isMobile ? 'fixed inset-0' : 'min-h-screen w-full'} bg-gray-100 flex items-center justify-center overflow-hidden`}>
+      <div className={`${isMobile ? 'w-full h-full' : 'w-[430px] h-[749px]'} mx-auto bg-transparent relative`}>
+        <div className={`w-full h-full ${isMobile ? '' : 'rounded-[28px]'} overflow-hidden bg-white`}>
+          <div 
+            className="phone relative w-full h-full bg-white overflow-hidden"
+            style={!isMobile ? { transformOrigin: 'top center', transform: 'scale(var(--scale, 1))' } : {}}
+          >
+            {!noHeader && <div className="h-14 flex items-center">{header}</div>}
+            <div className={`
+              overflow-y-auto overflow-x-hidden h-full
+              ${noFooter ? '' : 'pb-16'}
+              ${noHeader ? '' : 'pt-0'}
+              ${showBottomNav ? 'pb-14' : ''}
+            `}>
               {children}
             </div>
-            {!noFooter && !showBottomNav && <div className="phone-footer">{footer}</div>}
+            {!noFooter && !showBottomNav && <div className="absolute bottom-0 inset-x-0 h-16 bg-white">{footer}</div>}
             {showBottomNav && <BottomNavbar />}
           </div>
         </div>

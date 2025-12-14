@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../state/CartContext";
 import PhoneShell from "../components/PhoneShell";
-import "../checkout.css";
+import { useBackHandler } from "../utils/useBackHandler";
 
 export default function Checkout({ tableNumber }) {
   const { items, setQty, remove, subtotal } = useCart();
   const nav = useNavigate();
+  
+  // Handle back button: navigate within app
+  useBackHandler(false);
 
   // Confirmation modal state
   const [confirmDelete, setConfirmDelete] = useState({
@@ -54,62 +57,62 @@ export default function Checkout({ tableNumber }) {
   return (
     <PhoneShell noHeader noFooter>
       {/* TOP HEADER BAR */}
-      <div className="checkout-header">
+      <div className="absolute top-0 inset-x-0 h-14 bg-maroon flex items-center justify-between px-4 z-10">
         <button 
-          className="checkout-back-btn" 
+          className="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" 
           onClick={() => nav(-1)}
           aria-label="Back"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="19" y1="12" x2="5" y2="12" />
             <polyline points="12 19 5 12 12 5" />
           </svg>
         </button>
-        <h5 className="checkout-title">Order</h5>
-        <div style={{ width: '44px' }}></div> {/* Spacer for centering */}
+        <h5 className="text-lg font-bold text-white">Order</h5>
+        <div className="w-11"></div>
       </div>
 
       {/* SCROLLABLE CONTENT AREA */}
-      <div className="checkout-content">
+      <div className="pt-14 pb-32 h-full overflow-y-auto bg-gray-50">
         {!items.length && (
-          <div className="checkout-empty-state">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="1.5">
+          <div className="flex flex-col items-center justify-center pt-32 px-8 text-center">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="1.5" className="mb-4">
               <circle cx="9" cy="21" r="1" />
               <circle cx="20" cy="21" r="1" />
               <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
             </svg>
-            <p>Keranjang Anda kosong</p>
+            <p className="text-gray-500">Keranjang Anda kosong</p>
           </div>
         )}
 
         {/* ORDER ITEM LIST */}
-        <div className="checkout-items-container">
+        <div className="px-4 py-4 space-y-3">
           {items.map(({ menu, qty }) => (
-            <div className="checkout-item-card" key={menu.id}>
+            <div className="bg-white rounded-2xl p-4 flex gap-3 shadow-sm" key={menu.id}>
               <img
                 src={menu.photo_full_url || "https://via.placeholder.com/80"}
                 alt={menu.name}
-                className="checkout-item-image"
+                className="w-20 h-20 rounded-xl object-cover flex-shrink-0"
               />
-              <div className="checkout-item-details">
-                <h6 className="checkout-item-name">{menu.name}</h6>
-                <p className="checkout-item-price">
+              <div className="flex-1 flex flex-col">
+                <h6 className="text-[15px] font-bold text-gray-900 mb-1 leading-tight">{menu.name}</h6>
+                <p className="text-sm font-semibold text-maroon mb-3">
                   Rp {Number(menu.price).toLocaleString()}
                 </p>
                 
                 {/* Quantity Controls + Delete */}
-                <div className="checkout-item-actions">
-                  <div className="checkout-qty-controls">
+                <div className="flex items-center gap-2 mt-auto">
+                  <div className="flex items-center bg-gray-100 rounded-lg px-1 py-1">
                     <button
-                      className="checkout-qty-btn"
+                      className="w-7 h-7 rounded-md bg-white hover:bg-gray-50 text-gray-700 font-semibold flex items-center justify-center transition-all active:scale-95"
                       onClick={() => handleDecreaseQty(menu, qty)}
                       aria-label="Decrease"
                     >
                       −
                     </button>
-                    <span className="checkout-qty-number">{qty}</span>
+                    <span className="px-3 text-sm font-bold text-gray-900">{qty}</span>
                     <button
-                      className="checkout-qty-btn"
+                      className="w-7 h-7 rounded-md bg-white hover:bg-gray-50 text-gray-700 font-semibold flex items-center justify-center transition-all active:scale-95"
                       onClick={() => setQty(menu.id, qty + 1)}
                       aria-label="Increase"
                     >
@@ -117,10 +120,16 @@ export default function Checkout({ tableNumber }) {
                     </button>
                   </div>
                   <button
-                    className="checkout-delete-btn"
+                    className="ml-auto w-8 h-8 rounded-lg bg-red-50 hover:bg-red-100 flex items-center justify-center transition-all active:scale-95"
                     onClick={() => handleDelete(menu)}
+                    aria-label="Delete item"
                   >
-                    Hapus
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="3 6 5 6 21 6" />
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                      <line x1="10" y1="11" x2="10" y2="17" />
+                      <line x1="14" y1="11" x2="14" y2="17" />
+                    </svg>
                   </button>
                 </div>
               </div>
@@ -130,36 +139,33 @@ export default function Checkout({ tableNumber }) {
 
         {/* SUBTOTAL + TAX + TOTAL SECTION */}
         {items.length > 0 && (
-          <div className="checkout-summary-card">
-            <div className="checkout-summary-row">
-              <span className="checkout-summary-label">Subtotal</span>
-              <span className="checkout-summary-value">Rp {subtotal.toLocaleString()}</span>
+          <div className="mx-4 mt-4 bg-white rounded-2xl p-5 shadow-sm">
+            <div className="flex justify-between items-center mb-3">
+              <span className="text-sm text-gray-600">Subtotal</span>
+              <span className="text-sm font-semibold text-gray-900">Rp {subtotal.toLocaleString()}</span>
             </div>
-            <div className="checkout-summary-row">
-              <span className="checkout-summary-label">PPN 10%</span>
-              <span className="checkout-summary-value">Rp {ppn.toLocaleString()}</span>
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-sm text-gray-600">PPN 10%</span>
+              <span className="text-sm font-semibold text-gray-900">Rp {ppn.toLocaleString()}</span>
             </div>
-            <div className="checkout-summary-divider"></div>
-            <div className="checkout-summary-row checkout-summary-total">
-              <span className="checkout-summary-label-bold">Total</span>
-              <span className="checkout-summary-value-bold">Rp {total.toLocaleString()}</span>
+            <div className="w-full h-px bg-gray-200 mb-4"></div>
+            <div className="flex justify-between items-center">
+              <span className="text-base font-bold text-gray-900">Total</span>
+              <span className="text-lg font-bold text-maroon">Rp {total.toLocaleString()}</span>
             </div>
           </div>
         )}
-
-        {/* Bottom spacer */}
-        <div style={{ height: '120px' }}></div>
       </div>
 
       {/* BOTTOM PAYMENT BAR (STICKY) */}
       {items.length > 0 && (
-        <div className="checkout-bottom-bar">
-          <div className="checkout-bottom-left">
-            <span className="checkout-bottom-label">Total (termasuk PPN 10%)</span>
-            <span className="checkout-bottom-total">Rp {total.toLocaleString()}</span>
+        <div className="absolute bottom-0 inset-x-0 bg-white border-t border-gray-200 px-4 py-4 flex items-center gap-3 z-20">
+          <div className="flex-1">
+            <span className="block text-xs text-gray-500 mb-0.5">Total (termasuk PPN 10%)</span>
+            <span className="block text-lg font-bold text-gray-900">Rp {total.toLocaleString()}</span>
           </div>
           <button
-            className="checkout-payment-btn"
+            className="px-6 py-3 bg-maroon hover:bg-maroon-600 text-white rounded-full font-bold shadow-lg hover:shadow-xl transition-all"
             onClick={() => nav(`/payment?table=${tableNumber}`)}
           >
             Continue to Payment
@@ -172,30 +178,40 @@ export default function Checkout({ tableNumber }) {
         <>
           {/* Overlay */}
           <div 
-            className="checkout-modal-overlay"
+            className="fixed inset-0 bg-black/45 backdrop-blur-md z-[60] animate-fade-in"
             onClick={handleCancelDelete}
           />
           
           {/* Modal Box */}
-          <div className="checkout-modal-box">
-            <div className="checkout-modal-content">
-              <h3 className="checkout-modal-title">Remove Item?</h3>
-              <p className="checkout-modal-text">
-                Are you sure you want to remove <strong>{confirmDelete.itemName}</strong> from your order?
+          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[340px] bg-white rounded-3xl p-6 z-[70] shadow-2xl">
+            <div className="flex flex-col items-center text-center">
+              {/* Delete Icon */}
+              <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mb-4">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="3 6 5 6 21 6" />
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                  <line x1="10" y1="11" x2="10" y2="17" />
+                  <line x1="14" y1="11" x2="14" y2="17" />
+                </svg>
+              </div>
+
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Hapus Item?</h3>
+              <p className="text-sm text-gray-600 leading-relaxed mb-6">
+                Apakah Anda yakin ingin menghapus <strong>{confirmDelete.itemName}</strong> dari pesanan?
               </p>
               
-              <div className="checkout-modal-buttons">
+              <div className="flex gap-3 w-full">
                 <button
-                  className="checkout-modal-btn checkout-modal-btn-cancel"
+                  className="flex-1 px-4 py-3 bg-white border-2 border-gray-300 text-gray-700 rounded-full font-bold hover:bg-gray-50 transition-all"
                   onClick={handleCancelDelete}
                 >
-                  Cancel
+                  Batal
                 </button>
                 <button
-                  className="checkout-modal-btn checkout-modal-btn-confirm"
+                  className="flex-1 px-4 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-full font-bold hover:shadow-lg transition-all"
                   onClick={handleConfirmDelete}
                 >
-                  Yes, Remove
+                  Ya, Hapus
                 </button>
               </div>
             </div>

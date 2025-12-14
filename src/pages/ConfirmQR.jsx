@@ -4,7 +4,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import PhoneShell from "../components/PhoneShell";
 import { payOrder } from "../lib/api";
 import { getOrCreateCustomerSession } from "../utils/customerSession";
-import "../paymentqr.css";
 
 export default function ConfirmQR() {
   const nav = useNavigate();
@@ -47,11 +46,12 @@ export default function ConfirmQR() {
   if (processing) {
     return (
       <PhoneShell noHeader noFooter>
-        <div className="paymentqr-header">
-          <h5 className="paymentqr-header-title">QRIS</h5>
+        <div className="absolute top-0 inset-x-0 h-14 bg-maroon flex items-center justify-center z-10">
+          <h5 className="text-lg font-bold text-white">QRIS</h5>
         </div>
-        <div className="paymentqr-loading">
-          <div className="paymentqr-loading-text">Memproses pembayaran...</div>
+        <div className="flex flex-col items-center justify-center h-full bg-gray-50">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-maroon border-t-transparent mb-4"></div>
+          <div className="text-base font-semibold text-gray-700">Memproses pembayaran...</div>
         </div>
       </PhoneShell>
     );
@@ -60,14 +60,14 @@ export default function ConfirmQR() {
   if (error) {
     return (
       <PhoneShell noHeader noFooter>
-        <div className="paymentqr-header">
-          <h5 className="paymentqr-header-title">QRIS</h5>
+        <div className="absolute top-0 inset-x-0 h-14 bg-maroon flex items-center justify-center z-10">
+          <h5 className="text-lg font-bold text-white">QRIS</h5>
         </div>
-        <div className="confirmqr-content">
-          <h2 className="confirmqr-success-text" style={{color: '#dc2626'}}>Pembayaran Gagal</h2>
-          <p>Terjadi kesalahan saat memproses pembayaran.</p>
+        <div className="flex flex-col items-center justify-center h-full bg-gray-50 px-8 text-center">
+          <h2 className="text-3xl font-bold text-red-600 mb-4">Pembayaran Gagal</h2>
+          <p className="text-gray-600 mb-8">Terjadi kesalahan saat memproses pembayaran.</p>
           <button
-            className="confirmqr-home-btn"
+            className="px-8 py-4 bg-gradient-to-r from-orange to-orange-dark text-white rounded-full font-bold shadow-lg hover:shadow-xl transition-all"
             onClick={handleBackToHome}
           >
             Kembali Ke Home
@@ -80,28 +80,28 @@ export default function ConfirmQR() {
   return (
     <PhoneShell noHeader noFooter>
       {/* TOP HEADER */}
-      <div className="paymentqr-header">
+      <div className="absolute top-0 inset-x-0 h-14 bg-maroon flex items-center justify-between px-4 z-10">
         <button 
-          className="paymentqr-back-btn" 
+          className="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" 
           onClick={() => nav(-1)}
           aria-label="Back"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="19" y1="12" x2="5" y2="12" />
             <polyline points="12 19 5 12 12 5" />
           </svg>
         </button>
-        <h5 className="paymentqr-header-title">QRIS</h5>
-        <div style={{ width: '40px' }}></div>
+        <h5 className="text-lg font-bold text-white">QRIS</h5>
+        <div className="w-11"></div>
       </div>
 
       {/* CONTENT */}
-      <div className="confirmqr-content">
+      <div className="flex flex-col items-center justify-center h-full bg-gray-50 px-8 text-center">
         {/* SUCCESS TEXT */}
-        <h2 className="confirmqr-success-text">Pembayaran Berhasil</h2>
+        <h2 className="text-3xl font-bold text-green-600 mb-8">Pembayaran Berhasil</h2>
 
         {/* SUCCESS CHECKMARK */}
-        <div className="confirmqr-checkmark">
+        <div className="w-32 h-32 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-12 shadow-[0_8px_32px_rgba(34,197,94,0.3)] animate-bounce">
           <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="20 6 9 17 4 12" />
           </svg>
@@ -109,7 +109,7 @@ export default function ConfirmQR() {
 
         {/* BACK TO HOME BUTTON */}
         <button
-          className="confirmqr-home-btn"
+          className="px-8 py-4 bg-gradient-to-r from-orange to-orange-dark text-white rounded-full font-bold shadow-lg hover:shadow-xl transition-all"
           onClick={handleBackToHome}
         >
           Kembali Ke Home

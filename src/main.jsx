@@ -3,8 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { CartProvider } from "./state/CartContext";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "./phone.css";
+import "./index.css";
 
 
 
